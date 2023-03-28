@@ -4,6 +4,8 @@ import { history } from '_helpers';
 import { Nav, PrivateRoute } from '_components';
 import { Home } from 'home';
 import { Login } from 'login';
+import Card from '_components/Cards';
+import AddACard from '_components/AddACard';
 
 export { App };
 
@@ -12,7 +14,8 @@ function App() {
     // anywhere in the react app (inside or outside components)
     history.navigate = useNavigate();
     history.location = useLocation();
-
+    
+  
     return (
         <div className="app-container bg-light">
             <Nav />
@@ -27,6 +30,8 @@ function App() {
                         }
                     />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/cards" element={<Card />}/>
+                    <Route path="/cards/new" element={<AddACard/>}/>
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </div>

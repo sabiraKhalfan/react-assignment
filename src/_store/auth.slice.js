@@ -39,7 +39,7 @@ function createReducers() {
 }
 
 function createExtraActions() {
-    const baseUrl = `${process.env.REACT_APP_API_URL}/users`;
+    const baseUrl = `https://interview-api.onrender.com/v1`;
 
     return {
         login: login()
@@ -48,7 +48,7 @@ function createExtraActions() {
     function login() {
         return createAsyncThunk(
             `${name}/login`,
-            async ({ username, password }) => await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password })
+            async ({ email, password }) => await fetchWrapper.post(`${baseUrl}/auth/login`, { email, password })
         );
     }
 }
@@ -66,7 +66,7 @@ function createExtraReducers() {
             },
             [fulfilled]: (state, action) => {
                 const user = action.payload;
-                
+                console.log(action.payload,"payload")
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 state.user = user;
